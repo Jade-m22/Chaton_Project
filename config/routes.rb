@@ -7,7 +7,10 @@ Rails.application.routes.draw do
 
   resources :products
 
+  get "/cart", to: "orders#show", as: :cart
   resources :cart_items, only: [:index, :create, :destroy]
+
+  get "/dashboard", to: "users#dashboard", as: :dashboard
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -1,0 +1,9 @@
+<h1>Tableau de Bord</h1>
+<p>Bienvenue, <%= @user.email %> !</p>
+
+<h2>Vos commandes</h2>
+<ul>
+  <% @orders.each do |order| %>
+    <li>Commande #<%= order.id %> - <%= order.created_at.strftime("%d/%m/%Y") %></li>
+  <% end %>
+</ul>

@@ -13,11 +13,11 @@ class OrdersController < ApplicationController
   end  
   
   def add_item
-    @‌cart = current_user.cart
+    @cart = current_user.cart
     end
     
     def remove_item
-    @‌cart = current_user.cart
+    @cart = current_user.cart
     end
 
   # POST /orders (Créer une commande à partir du panier)
