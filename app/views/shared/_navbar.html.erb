@@ -24,7 +24,9 @@
             <%= link_to "Tableau de Bord", dashboard_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Déconnexion", logout_path, method: :delete, class: "nav-link text-danger" %>
+            <%= form_with url: destroy_user_session_path, method: :delete, class: "d-inline" do %>
+              <%= submit_tag "Se déconnecter", class: "btn btn-danger" %>
+            <% end %>
           </li>
         <% else %>
           <li class="nav-item">
