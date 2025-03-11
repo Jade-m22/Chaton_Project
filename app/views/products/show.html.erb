@@ -10,12 +10,7 @@
 
 <p><%= @product.description %></p>
 
-<% if @product.stock > 0 %>
-  <p>🟢 En stock</p>
-  <%= button_to "Ajouter au panier", cart_path(@product), method: :post %>
-<% else %>
-  <p>🔴 Rupture de stock</p>
-<% end %>
+<%= button_to "Ajouter au panier", cart_path(@product), method: :post %>
 
 <h2>Avis des clients</h2>
 <%= render @product.reviews %>
