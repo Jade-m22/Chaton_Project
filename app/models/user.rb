@@ -12,4 +12,8 @@ class User < ApplicationRecord
   def admin?
     admin == true
   end
+
+  def cart
+    super || create_cart
+  end
 end

@@ -8,8 +8,11 @@ Rails.application.routes.draw do
 
   resources :products
 
-  get "/cart(/:order_id)", to: "orders#show", as: :cart
-  resources :cart_items, only: [:index, :create, :destroy]
+  resource :cart, only: [:show] do
+    post "add_item/:product_id", to: "carts#add_item", as: "add_item"
+    delete "remove_item/:id", to: "carts#remove_item", as: "remove_item"
+    delete "empty", to: "carts#empty", as: "empty"
+  end
 
   get "/dashboard", to: "users#dashboard", as: :dashboard
 
