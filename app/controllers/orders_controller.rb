@@ -11,7 +11,16 @@ class OrdersController < ApplicationController
   # GET /orders/:id (Afficher une commande spécifique)
   def show
     render json: @order
+    @‌cart = current_user.cart
   end
+  
+  def add_item
+    @‌cart = current_user.cart
+    end
+    
+    def remove_item
+    @‌cart = current_user.cart
+    end
 
   # POST /orders (Créer une commande à partir du panier)
   def create
