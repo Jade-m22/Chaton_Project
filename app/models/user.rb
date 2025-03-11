@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
 
   has_many :orders, dependent: :destroy
-
+  has_one :cart, dependent: :destroy
   has_many :cart_items, dependent: :destroy
 
   
@@ -12,5 +12,9 @@ class User < ApplicationRecord
   
   def admin?
     admin == true
+  end
+
+  def cart
+    super || create_cart
   end
 end

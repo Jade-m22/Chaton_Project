@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[8.0].define(version: 2025_03_11_145833) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_11_191834) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -46,8 +45,38 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_11_145833) do
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "cart_id", null: false
+    t.index ["cart_id"], name: "index_cart_items_on_cart_id"
     t.index ["product_id"], name: "index_cart_items_on_product_id"
     t.index ["user_id"], name: "index_cart_items_on_user_id"
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "product_id", null: false
+    t.integer "quantity"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.decimal "total_price"
+    t.string "status"
+    t.string "stripe_payment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -74,8 +103,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_11_145833) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "products"
   add_foreign_key "cart_items", "users"
+  add_foreign_key "carts", "users"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "users"
