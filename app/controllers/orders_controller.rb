@@ -9,8 +9,22 @@ class OrdersController < ApplicationController
   end
 
   def show
+<<<<<<< HEAD
     @order = current_user.orders.find(params[:id]) # Charge la commande
   end  
+=======
+    render json: @order
+    @‌cart = current_user.cart
+  end
+  
+  def add_item
+    @‌cart = current_user.cart
+    end
+    
+    def remove_item
+    @‌cart = current_user.cart
+    end
+>>>>>>> main
 
   # POST /orders (Créer une commande à partir du panier)
   def create

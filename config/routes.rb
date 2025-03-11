@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get "/cart", to: "orders#show", as: :cart
   resources :cart_items, only: [:index, :create, :destroy]
 
+  get "/dashboard", to: "users#dashboard", as: :dashboard
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
