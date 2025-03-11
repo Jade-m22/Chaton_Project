@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   has_many :orders, dependent: :destroy
   
-  validates :first_name, :email, presence: true
+  validates :email, presence: true
   
   def admin?
     is_admin == true
