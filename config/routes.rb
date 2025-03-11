@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :products
 
-  get "/cart", to: "cart_items#index", as: :cart
+  get "/cart", to: "orders#show", as: :cart
   resources :cart_items, only: [:index, :create, :destroy]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

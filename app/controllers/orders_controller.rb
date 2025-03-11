@@ -8,10 +8,9 @@ class OrdersController < ApplicationController
     render json: @orders
   end
 
-  # GET /orders/:id (Afficher une commande spécifique)
   def show
-    render json: @order
-  end
+    @order = current_user.orders.find(params[:id]) # Charge la commande
+  end  
 
   # POST /orders (Créer une commande à partir du panier)
   def create
