@@ -14,6 +14,8 @@ class UsersController < ApplicationController
 
   # Afficher un utilisateur
   def show
+    @user = current_user
+    @orders = @user.orders
   end
 
   # Formulaire d'édition d'un utilisateur
