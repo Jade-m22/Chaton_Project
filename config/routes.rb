@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[index show edit update destroy]
   resources :orders, only: [:index, :show, :create, :update, :destroy]
 
-  resources :products, 
+  resources :products
 
   resources :cart_items, only: [:index, :create, :destroy]
 
