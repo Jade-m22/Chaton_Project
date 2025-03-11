@@ -1,6 +1,17 @@
 Rails.application.routes.draw do
+  root to: "products#index"
+
   devise_for :users
   resources :users, only: %i[index show edit update destroy]
+  resources :orders, only: [:index, :show, :create, :update, :destroy]
+  delete "/logout", to: "users#logout", as: :logout
+
+  resources :products
+
+  get "/cart(/:order_id)", to: "orders#show", as: :cart
+  resources :cart_items, only: [:index, :create, :destroy]
+
+  get "/dashboard", to: "users#dashboard", as: :dashboard
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

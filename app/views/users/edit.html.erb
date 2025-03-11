@@ -1,0 +1,22 @@
+<h1>Modifier mon profil</h1>
+
+<%= form_for @user do |f| %>
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password, placeholder: "(Laisser vide pour ne pas modifier)" %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, placeholder: "(Laisser vide pour ne pas modifier)" %>
+  </div>
+
+  <div>
+    <%= f.submit "Mettre à jour" %>
+  </div>
+<% end %>

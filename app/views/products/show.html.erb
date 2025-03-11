@@ -1,0 +1,14 @@
+<h1><%= @product.name %></h1>
+
+<% if @product.image.attached? %>
+  <%= image_tag @product.image.variant(resize_to_limit: [300, 300]) %>
+<% else %>
+  <p>Aucune image disponible</p>
+<% end %>
+
+<p><strong>Prix :</strong> <%= number_to_currency(@product.price, unit: "€") %></p>
+
+<p><%= @product.description %></p>
+
+<%= button_to "Ajouter au panier", cart_path(@product), method: :post %>
+

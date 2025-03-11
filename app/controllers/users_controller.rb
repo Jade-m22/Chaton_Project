@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[edit update destroy]
   before_action :authorize_user, only: %i[edit update destroy]
 
   # Afficher tous les utilisateurs (réservé aux admins)
@@ -14,6 +14,8 @@ class UsersController < ApplicationController
 
   # Afficher un utilisateur
   def show
+    @user = current_user
+    @orders = @user.orders
   end
 
   # Formulaire d'édition d'un utilisateur
@@ -39,12 +41,25 @@ class UsersController < ApplicationController
     end
   end
 
+  def logout
+    sign_out(current_user)
+    redirect_to root_path, notice: "Vous avez été déconnecté."
+  end
+  
+
+  def dashboard
+    @user = current_user
+    @orders = @user.orders
+  end  
+
   private
 
   # Trouver un utilisateur selon l'ID
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
+    redirect_to root_path, alert: "Utilisateur introuvable." unless @user
   end
+  
 
   # Vérifier si l'utilisateur peut modifier/mettre à jour son propre compte
   def authorize_user
