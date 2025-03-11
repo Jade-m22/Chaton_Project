@@ -14,7 +14,11 @@
 
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to "Panier", cart_path(order_id: current_user.orders.last), class: "nav-link" %>
+            <% if current_user.orders.exists? %>
+              <%= link_to "Panier", cart_path(order_id: current_user.orders.last.id), class: "nav-link" %>
+            <% else %>
+              <%= link_to "Panier", cart_path, class: "nav-link" %>
+            <% end %>
           </li>
           <li class="nav-item">
             <%= link_to "Tableau de Bord", dashboard_path, class: "nav-link" %>

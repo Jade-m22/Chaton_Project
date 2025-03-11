@@ -5,12 +5,21 @@ class OrdersController < ApplicationController
   # GET /orders (Afficher toutes les commandes d'un utilisateur)
   def index
     @orders = current_user.orders
-    render json: @orders
   end
 
   def show
-    @order = current_user.orders.find(params[:id]) # Charge la commande
-  end  
+    if params[:order_id].present?
+      @order = current_user.orders.find_by(id: params[:order_id])
+    else
+      @order = current_user.orders.last
+    end
+
+    if @order.nil?
+      redirect_to root_path, alert: "Votre panier est vide."
+    else
+      render :show
+    end
+  end 
   
   def add_item
     @cart = current_user.cart
