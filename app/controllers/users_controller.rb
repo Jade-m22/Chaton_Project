@@ -41,6 +41,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def dashboard
+    @user = current_user
+    @orders = @user.orders
+  end  
+
   private
 
   # Trouver un utilisateur selon l'ID
