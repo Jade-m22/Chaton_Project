@@ -3,7 +3,6 @@ class CartsController < ApplicationController
   before_action :set_cart
 
   def show
-    @cart = current_user.cart
   end
 
   def add_item
@@ -11,6 +10,7 @@ class CartsController < ApplicationController
     cart_item = @cart.cart_items.find_or_initialize_by(product: product)
     cart_item.quantity ||= 0
     cart_item.quantity += 1
+
     if cart_item.save
       redirect_to cart_path, notice: "Produit ajouté au panier."
     else
@@ -19,9 +19,13 @@ class CartsController < ApplicationController
   end
 
   def remove_item
-    cart_item = @cart.cart_items.find(params[:id])
-    cart_item.destroy
-    redirect_to cart_path, notice: "Produit retiré du panier."
+    cart_item = @cart.cart_items.find_by(id: params[:id])
+    if cart_item
+      cart_item.destroy
+      redirect_to cart_path, notice: "Produit retiré du panier."
+    else
+      redirect_to cart_path, alert: "Produit introuvable."
+    end
   end
 
   def empty
@@ -32,6 +36,6 @@ class CartsController < ApplicationController
   private
 
   def set_cart
-    @cart = current_user.cart || current_user.create_cart
+    @cart = current_user.cart || Cart.new(user: current_user)
   end
 end

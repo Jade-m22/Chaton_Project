@@ -1,46 +1,28 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user! # Si tu utilises Devise
+  before_action :authenticate_user!
   before_action :set_order, only: [:show, :update, :destroy]
 
-  # GET /orders (Afficher toutes les commandes d'un utilisateur)
+  # GET /orders - Afficher toutes les commandes de l'utilisateur
   def index
     @orders = current_user.orders
   end
 
+  # GET /orders/:id - Afficher une commande
   def show
-    if params[:order_id].present?
-      @order = current_user.orders.find_by(id: params[:order_id])
-    else
-      @order = current_user.orders.last
-    end
+    redirect_to root_path, alert: "Commande introuvable." unless @order
+  end
 
-    if @order.nil?
-      redirect_to root_path, alert: "Votre panier est vide."
-    else
-      render :show
-    end
-  end 
-  
-  def add_item
-    @cart = current_user.cart
-    end
-    
-    def remove_item
-    @cart = current_user.cart
-    end
-
-  # POST /orders (Créer une commande à partir du panier)
+  # POST /orders - Créer une commande
   def create
     cart_items = current_user.cart_items
 
     if cart_items.empty?
-      render json: { error: "Votre panier est vide." }, status: :unprocessable_entity
+      redirect_to cart_path, alert: "Votre panier est vide."
       return
     end
 
     order = current_user.orders.new(status: "pending")
 
-    # Ajouter les articles du panier à la commande
     cart_items.each do |cart_item|
       order.order_items.build(
         product: cart_item.product,
@@ -52,41 +34,43 @@ class OrdersController < ApplicationController
     order.calculate_total_price
 
     if order.save
-      cart_items.destroy_all # Vider le panier après commande
-      render json: order, status: :created
+      cart_items.destroy_all
+      redirect_to order_path(order), notice: "Commande créée avec succès."
     else
-      render json: order.errors, status: :unprocessable_entity
+      redirect_to cart_path, alert: "Erreur lors de la création de la commande."
     end
   end
 
-  # PATCH/PUT /orders/:id (Mettre à jour le statut d'une commande)
+  # PATCH/PUT /orders/:id - Mettre à jour une commande
   def update
+    unless current_user.admin? || @order.user == current_user
+      redirect_to orders_path, alert: "Accès non autorisé."
+      return
+    end
+
     if @order.update(order_params)
-      render json: @order
+      redirect_to @order, notice: "Commande mise à jour."
     else
-      render json: @order.errors, status: :unprocessable_entity
+      render :edit
     end
   end
 
-  # DELETE /orders/:id (Annuler une commande)
+  # DELETE /orders/:id - Annuler une commande
   def destroy
     if @order.status == "pending"
       @order.destroy
-      render json: { message: "Commande annulée avec succès." }
+      redirect_to orders_path, notice: "Commande annulée avec succès."
     else
-      render json: { error: "Impossible d'annuler une commande déjà payée ou expédiée." }, status: :forbidden
+      redirect_to orders_path, alert: "Impossible d'annuler une commande déjà traitée."
     end
   end
 
   private
 
-  # Trouver une commande spécifique
   def set_order
     @order = current_user.orders.find_by(id: params[:id])
-    render json: { error: "Commande introuvable." }, status: :not_found unless @order
   end
 
-  # Autoriser uniquement la mise à jour du statut
   def order_params
     params.require(:order).permit(:status)
   end

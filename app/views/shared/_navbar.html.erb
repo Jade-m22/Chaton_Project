@@ -16,6 +16,13 @@
           <li class="nav-item">
             <%= link_to "Panier", cart_path, class: "nav-link" %>
           </li>
+
+          <% if current_user.admin? %>
+            <li class="nav-item">
+              <%= link_to "Ajouter un produit", new_product_path, class: "nav-link text-warning fw-bold" %>
+            </li>
+          <% end %>
+
           <li class="nav-item">
             <%= link_to "Tableau de Bord", dashboard_path, class: "nav-link" %>
           </li>
