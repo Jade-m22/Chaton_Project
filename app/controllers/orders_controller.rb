@@ -108,12 +108,23 @@ class OrdersController < ApplicationController
   
     redirect_to dashboard_path
   end
+
+  def destroy
+    if current_user.admin?
+      @order.destroy
+      flash[:notice] = "Commande supprimée avec succès."
+    else
+      flash[:alert] = "Action non autorisée."
+    end
+  
+    redirect_to dashboard_path
+  end  
   
   
   private
 
   def set_order
-    @order = current_user.orders.find_by(id: params[:id])
+    @order = current_user.admin? ? Order.find_by(id: params[:id]) : current_user.orders.find_by(id: params[:id])
     redirect_to root_path, alert: "Commande introuvable." unless @order
   end
 
