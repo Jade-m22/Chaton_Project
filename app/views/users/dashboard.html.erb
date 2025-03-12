@@ -28,12 +28,15 @@
           <td><%= order.status.capitalize %></td>
 
           <% if current_user.admin? %>
-            <td>
-              <% if order.status == "paid" %>
-                <%= button_to "Expédier", order_path(order, order: { status: "shipped" }), method: :patch, class: "btn btn-success btn-sm" %>
-              <% end %>
-            </td>
+          <td>
+            <% if order.status == "paid" %>
+              <%= button_to "Expédier", order_path(order, order: { status: "shipped" }), method: :patch, class: "btn btn-success btn-sm" %>
+            <% end %>
+
+            <%= button_to "Annuler", order_path(order), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Voulez-vous vraiment annuler cette commande ?" } %>
+          </td>
           <% end %>
+
         </tr>
       <% end %>
     </tbody>
