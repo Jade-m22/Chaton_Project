@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
   def dashboard
     @user = current_user
-    @orders = @user.orders
+    @orders = current_user.admin? ? Order.includes(:user).all : current_user.orders
   end  
 
   private
