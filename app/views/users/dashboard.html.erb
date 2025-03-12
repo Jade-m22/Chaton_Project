@@ -1,9 +1,38 @@
 <h1>Tableau de Bord</h1>
-<p>Bienvenue, <%= @user.email %> !</p>
+<p>Bienvenue, <%= current_user.email %> !</p>
 
-<h2>Vos commandes</h2>
-<ul>
-  <% @orders.each do |order| %>
-    <li>Commande #<%= order.id %> - <%= order.created_at.strftime("%d/%m/%Y") %></li>
-  <% end %>
-</ul>
+<% if current_user.admin? %>
+  <h2>📊 Tableau de bord Admin</h2>
+  <p>Statistiques des ventes et gestion des commandes.</p>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Client</th>
+        <th>Date</th>
+        <th>Total (€)</th>
+        <th>Statut</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td>#<%= order.id %></td>
+          <td><%= order.user.email %></td>
+          <td><%= order.created_at.strftime("%d/%m/%Y") %></td>
+          <td><%= number_to_currency(order.total_price, unit: "€") %></td>
+          <td><%= order.status.capitalize %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% else %>
+  <h2>🛒 Vos commandes</h2>
+  <ul>
+    <% @orders.each do |order| %>
+      <li>Commande #<%= order.id %> - <%= order.created_at.strftime("%d/%m/%Y") %></li>
+    <% end %>
+  </ul>
+<% end %>

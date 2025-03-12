@@ -4,8 +4,13 @@ class OrdersController < ApplicationController
 
   # GET /orders - Afficher toutes les commandes de l'utilisateur
   def index
-    @orders = current_user.orders
+    if current_user.admin?
+      @orders = Order.includes(:user, :order_items).all # Admin voit tout
+    else
+      @orders = current_user.orders # Utilisateur normal voit ses commandes
+    end
   end
+  
 
   # GET /orders/:id - Afficher une commande
   def show
