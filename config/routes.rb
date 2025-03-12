@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     post "add_item/:product_id", to: "carts#add_item", as: "add_item"
     delete "remove_item/:id", to: "carts#remove_item", as: "remove_item"
     delete "empty", to: "carts#empty", as: "empty"
+    patch "update_quantity/:id", to: "carts#update_quantity", as: "update_quantity"
   end
+  
 
   get "/dashboard", to: "users#dashboard", as: :dashboard
 
