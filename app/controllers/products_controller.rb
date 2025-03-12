@@ -15,18 +15,20 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+
     if @product.save
-      redirect_to @product, notice: 'Produit ajouté avec succès.'
+      redirect_to @product, notice: "Produit ajouté avec succès."
     else
       render :new
     end
   end
 
-  def edit; end
+  def edit
+  end
 
   def update
     if @product.update(product_params)
-      redirect_to @product, notice: 'Produit mis à jour.'
+      redirect_to @product, notice: "Produit mis à jour."
     else
       render :edit
     end
@@ -34,7 +36,7 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
-    redirect_to products_path, notice: 'Produit supprimé.'
+    redirect_to products_path, notice: "Produit supprimé."
   end
 
   private
@@ -44,8 +46,8 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :price, :image)
-  end
+    params.require(:product).permit(:name, :price, :description, :category, :image)
+  end  
 
   def authenticate_admin!
     redirect_to root_path, alert: "Accès refusé" unless current_user&.admin?
