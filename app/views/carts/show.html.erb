@@ -12,17 +12,17 @@
       </tr>
     </thead>
     <tbody>
-      <% @cart.each do |product_id, quantity| %>
-        <% product = Product.find(product_id) %>
+      <% @cart.cart_items.each do |cart_item| %>
+        <% product = cart_item.product %>
         <tr>
           <td><%= product.name %></td>
-          <td><%= quantity %></td>
+          <td><%= cart_item.quantity %></td>
           <td>
-            <%= button_to "➖", cart_remove_path(product), method: :delete, class: "btn btn-danger" %>
+            <%= button_to "➖", remove_item_cart_path(cart_item.id), method: :delete, class: "btn btn-danger" %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <%= link_to "Passer la commande", new_order_path, class: "btn btn-success" %>
+  <%= link_to "Passer la commande", orders_path, method: :post, class: "btn btn-success" %>
 <% end %>
