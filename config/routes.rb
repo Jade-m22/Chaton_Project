@@ -3,7 +3,12 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users, only: %i[index show edit update destroy]
-  resources :orders, only: [:index, :show, :create, :update, :destroy]
+  resources :orders, only: [:index, :show, :create, :update, :destroy] do
+    member do
+      get :checkout
+    end
+  end
+
   delete "/logout", to: "users#logout", as: :logout
 
   resources :products

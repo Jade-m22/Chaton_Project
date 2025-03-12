@@ -1,16 +1,11 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: [:show, :update, :destroy]
+  before_action :set_order, only: [:show, :update, :destroy, :checkout]
 
   # GET /orders - Afficher toutes les commandes de l'utilisateur
   def index
-    if current_user.admin?
-      @orders = Order.includes(:user, :order_items).all # Admin voit tout
-    else
-      @orders = current_user.orders # Utilisateur normal voit ses commandes
-    end
+    @orders = current_user.admin? ? Order.includes(:user, :order_items).all : current_user.orders
   end
-  
 
   # GET /orders/:id - Afficher une commande
   def show
@@ -28,52 +23,58 @@ class OrdersController < ApplicationController
 
     order = current_user.orders.new(status: "pending")
 
+    # Ajouter les produits du panier à la commande
     cart_items.each do |cart_item|
       order.order_items.build(
         product: cart_item.product,
         quantity: cart_item.quantity,
-        unit_price: cart_item.product.price
+        price: cart_item.product.price
       )
     end
 
-    order.calculate_total_price
+    order.calculate_total_price # Assure que total_price est défini avant save
 
     if order.save
       cart_items.destroy_all
-      redirect_to order_path(order), notice: "Commande créée avec succès."
+      redirect_to checkout_order_path(order)  # Redirection vers checkout après la création de la commande
     else
+      puts "❌ Erreur lors de la sauvegarde de l'order : #{order.errors.full_messages}"
       redirect_to cart_path, alert: "Erreur lors de la création de la commande."
     end
   end
 
-  # PATCH/PUT /orders/:id - Mettre à jour une commande
-  def update
-    unless current_user.admin? || @order.user == current_user
-      redirect_to orders_path, alert: "Accès non autorisé."
-      return
-    end
 
-    if @order.update(order_params)
-      redirect_to @order, notice: "Commande mise à jour."
-    else
-      render :edit
+  # GET /orders/:id/checkout - Rediriger vers Stripe Checkout
+  def checkout
+    begin
+      session = Stripe::Checkout::Session.create(
+        payment_method_types: ["card"],
+        line_items: @order.order_items.map do |item|
+          {
+            price_data: {
+              currency: "eur",
+              product_data: { name: item.product.name },
+              unit_amount: (item.price * 100).to_i
+            },
+            quantity: item.quantity
+          }
+        end,
+        mode: "payment",
+        success_url: dashboard_url,  # ✅ Redirige vers le Dashboard après paiement
+        cancel_url: cart_url
+      )
+  
+      redirect_to session.url, allow_other_host: true
+    rescue Stripe::StripeError => e
+      redirect_to cart_url, alert: "Erreur Stripe : #{e.message}"
     end
   end
-
-  # DELETE /orders/:id - Annuler une commande
-  def destroy
-    if @order.status == "pending"
-      @order.destroy
-      redirect_to orders_path, notice: "Commande annulée avec succès."
-    else
-      redirect_to orders_path, alert: "Impossible d'annuler une commande déjà traitée."
-    end
-  end
-
+  
   private
 
   def set_order
     @order = current_user.orders.find_by(id: params[:id])
+    redirect_to root_path, alert: "Commande introuvable." unless @order
   end
 
   def order_params

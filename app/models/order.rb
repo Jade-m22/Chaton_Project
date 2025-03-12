@@ -5,9 +5,9 @@ class Order < ApplicationRecord
   validates :status, presence: true, inclusion: { in: ["pending", "paid", "shipped", "cancelled"] }
   validates :total_price, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
-  before_save :calculate_total_price
+  before_validation :calculate_total_price
 
   def calculate_total_price
-    self.total_price = order_items.sum(&:total_price)
+    self.total_price = order_items.sum(&:total_price) || 0
   end
 end
