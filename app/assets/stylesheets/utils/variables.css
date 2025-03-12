@@ -1,0 +1,14 @@
+:root {
+  /* 🎨 Couleurs */
+  --primary-color: #ce8dc6;
+  --secondary-color: #8b4a7e;
+  --background-color: #f4f4f4;
+  --text-color: #333;
+
+  /* 📏 Espacements */
+  --spacing-unit: 8px;
+
+  /* 🖋️ Typographie */
+  --font-primary: Arial, sans-serif;
+  --font-size-base: 16px;
+}
