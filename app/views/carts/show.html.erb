@@ -42,8 +42,14 @@
       <span class="total-price"><%= number_to_currency(total_price, unit: "€") %></span>
     </div>
 
+    <% if @cart.cart_items.any? %>
     <div class="cart-actions">
-      <%= link_to "Passer la commande", orders_path, method: :post, class: "btn-order" %>
+      <%= form_with url: orders_path, method: :post, local: true do |f| %>
+        <%= f.submit "Passer la commande", class: "btn-order", data: { turbo: false } %>
+      <% end %>
+    </div>
+    <% end %>
+
     </div>
   </div>
 <% end %>
