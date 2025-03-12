@@ -3,11 +3,12 @@
 <div class="products-container">
   <% @products.each do |product| %>
     <div class="product-card">
-      <h2><%= product.name %></h2>
-      <p>Prix : <%= number_to_currency(product.price, unit: "€") %></p>
-      <%= link_to "Voir le produit", product_path(product), class: "btn-show" %>
+      <%= image_tag product.image.variant(resize: "300x300"), alt: product.name if product.image.attached? %>
+      <div class="product-info">
+        <h2><%= product.name %></h2>
+        <p>Prix : <%= number_to_currency(product.price, unit: "€") %></p>
+        <%= link_to "Voir le produit", product_path(product), class: "btn-show" %>
+      </div>
     </div>
   <% end %>
 </div>
-
-
