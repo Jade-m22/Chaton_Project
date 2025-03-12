@@ -13,6 +13,9 @@
         <th>Date</th>
         <th>Total (€)</th>
         <th>Statut</th>
+        <% if current_user.admin? %>
+          <th>Actions</th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
@@ -23,16 +26,23 @@
           <td><%= order.created_at.strftime("%d/%m/%Y") %></td>
           <td><%= number_to_currency(order.total_price, unit: "€") %></td>
           <td><%= order.status.capitalize %></td>
+
+          <% if current_user.admin? %>
+            <td>
+              <% if order.status == "paid" %>
+                <%= button_to "Expédier", order_path(order, order: { status: "shipped" }), method: :patch, class: "btn btn-success btn-sm" %>
+              <% end %>
+            </td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
   </table>
-
 <% else %>
   <h2>🛒 Vos commandes</h2>
   <ul>
     <% @orders.each do |order| %>
-      <li>Commande #<%= order.id %> - <%= order.created_at.strftime("%d/%m/%Y") %></li>
+      <li>Commande #<%= order.id %> - <%= order.created_at.strftime("%d/%m/%Y") %> - <strong><%= order.status.capitalize %></strong></li>
     <% end %>
   </ul>
 <% end %>

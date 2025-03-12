@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :show, :create, :update, :destroy] do
     member do
       get :checkout
+      get :success  # ✅ Redirige ici après paiement réussi
+      get :cancel   # ❌ Redirige ici après paiement échoué
     end
-  end
+  end  
 
   delete "/logout", to: "users#logout", as: :logout
 

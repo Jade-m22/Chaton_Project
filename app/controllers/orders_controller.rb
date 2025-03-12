@@ -54,21 +54,61 @@ class OrdersController < ApplicationController
             price_data: {
               currency: "eur",
               product_data: { name: item.product.name },
-              unit_amount: (item.price * 100).to_i
+              unit_amount: (item.price * 100).to_i # Convertir en centimes
             },
             quantity: item.quantity
           }
-        end,
+        end, # <== FERMETURE DU BLOC .map CORRECTEMENT PLACÉE
         mode: "payment",
-        success_url: dashboard_url,  # ✅ Redirige vers le Dashboard après paiement
-        cancel_url: cart_url
+        success_url: success_order_url(@order),
+        cancel_url: cancel_order_url(@order)
       )
+  
+      # Stocker l'ID de session Stripe dans l'ordre
+      @order.update(stripe_payment_id: session.id)
   
       redirect_to session.url, allow_other_host: true
     rescue Stripe::StripeError => e
-      redirect_to cart_url, alert: "Erreur Stripe : #{e.message}"
+      puts "Erreur Stripe: #{e.message}"
+      redirect_to cart_url, alert: "Erreur lors de la redirection vers Stripe."
     end
   end
+
+  def success
+    @order = current_user.orders.find_by(id: params[:id])
+  
+    if @order && @order.status == "pending"
+      @order.update(status: "paid")
+      flash[:notice] = "🎉 Paiement réussi ! Merci pour votre commande."
+    else
+      flash[:alert] = "Commande introuvable ou déjà traitée."
+    end
+  
+    redirect_to dashboard_path
+  end
+
+  def cancel
+    @order = current_user.orders.find_by(id: params[:id])
+  
+    if @order && @order.status == "pending"
+      @order.update(status: "cancelled")
+      flash[:alert] = "Le paiement a été annulé."
+    end
+  
+    redirect_to cart_path
+  end
+  
+  def update
+    @order = Order.find(params[:id])
+  
+    if current_user.admin? && params[:order][:status] == "shipped"
+      @order.update(status: "shipped")
+      flash[:notice] = "Commande ##{@order.id} marquée comme expédiée."
+    end
+  
+    redirect_to dashboard_path
+  end
+  
   
   private
 
