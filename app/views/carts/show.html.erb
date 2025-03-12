@@ -1,28 +1,49 @@
-<h1>🛒 Votre panier</h1>
+<h1 class="cart-title">🛍 Votre Panier</h1>
 
 <% if @cart.cart_items.empty? %>
-  <p>Votre panier est vide.</p>
+  <div class="alert-empty">Votre panier est vide.</div>
 <% else %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Produit</th>
-        <th>Quantité</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @cart.cart_items.each do |cart_item| %>
-        <% product = cart_item.product %>
+  <div class="cart-container">
+    <table class="cart-table">
+      <thead>
         <tr>
-          <td><%= product.name %></td>
-          <td><%= cart_item.quantity %></td>
-          <td>
-            <%= button_to "➖", remove_item_cart_path(cart_item.id), method: :delete, class: "btn btn-danger" %>
-          </td>
+          <th>Produit</th>
+          <th>Prix Unitaire</th>
+          <th>Quantité</th>
+          <th>Total</th>
+          <th>Actions</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <%= link_to "Passer la commande", orders_path, method: :post, class: "btn btn-success" %>
+      </thead>
+      <tbody>
+        <% total_price = 0 %>
+        <% @cart.cart_items.each do |cart_item| %>
+          <% product = cart_item.product %>
+          <% item_total = product.price * cart_item.quantity %>
+          <% total_price += item_total %>
+          <tr>
+            <td class="product-name"><%= product.name %></td>
+            <td><%= number_to_currency(product.price, unit: "€") %></td>
+            <td>
+              <%= form_with url: update_quantity_cart_path(cart_item), method: :patch, local: true, class: "quantity-form" do |form| %>
+                <%= form.number_field :quantity, value: cart_item.quantity, min: 1, class: "quantity-input", onchange: "this.form.submit()" %>
+              <% end %>
+            </td>
+            <td><%= number_to_currency(item_total, unit: "€") %></td>
+            <td>
+              <%= button_to "❌", remove_item_cart_path(cart_item.id), method: :delete, class: "btn-delete" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="cart-total">
+      <span>Total :</span>
+      <span class="total-price"><%= number_to_currency(total_price, unit: "€") %></span>
+    </div>
+
+    <div class="cart-actions">
+      <%= link_to "Passer la commande", orders_path, method: :post, class: "btn-order" %>
+    </div>
+  </div>
 <% end %>

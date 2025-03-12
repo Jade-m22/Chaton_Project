@@ -28,6 +28,12 @@ class CartsController < ApplicationController
     end
   end
 
+  def update_quantity
+    cart_item = CartItem.find(params[:id])
+    cart_item.update(quantity: params[:quantity].to_i)
+    redirect_to cart_path, notice: "Quantité mise à jour !"
+  end  
+
   def empty
     @cart.cart_items.destroy_all
     redirect_to cart_path, notice: "Panier vidé."
