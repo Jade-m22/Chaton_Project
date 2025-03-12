@@ -5,7 +5,7 @@
   --background-color: #fafafa;
   --text-color: #4a4a4a;
   --border-color: rgba(139, 74, 126, 0.2);
-  --spacing-unit: 8px;
+  --spacing-unit: 8px;  /* Unité d'espacement */
   --font-primary: "Poppins", sans-serif;
   --font-size-base: 16px;
 }
@@ -38,98 +38,29 @@ body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
-/* 📊 Tableau */
-.cart-table {
+/* 📝 Formulaire */
+.input-group {
+  margin-bottom: var(--spacing-unit * 3); /* Ajoute un espacement entre chaque champ de formulaire */
+}
+
+/* 📏 Champs de saisie */
+input[type="email"], input[type="password"] {
   width: 100%;
-  border-collapse: collapse;
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.cart-table th {
-  background: var(--primary-color);
-  color: white;
-  padding: 10px;
-  font-weight: 500;
-}
-
-.cart-table td {
-  padding: 12px;
-  text-align: center;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.cart-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-.cart-table tbody tr:hover {
-  background: rgba(206, 141, 198, 0.07);
-}
-
-/* 📏 Formulaire quantité */
-.quantity-form {
-  display: flex;
-  justify-content: center;
-}
-
-.quantity-input {
-  width: 45px;
-  height: 30px;
-  text-align: center;
+  padding: var(--spacing-unit * 2); /* Ajout de padding pour aérer le champ */
+  font-size: 16px;
   border: 1px solid var(--border-color);
   border-radius: 6px;
-  font-size: 16px;
   background: white;
   color: var(--text-color);
   transition: 0.2s;
 }
 
-.quantity-input:focus {
+input[type="email"]:focus, input[type="password"]:focus {
   outline: none;
   border-color: var(--secondary-color);
 }
 
-/* ❌ Bouton supprimer */
-.btn-delete {
-  background: none;
-  color: var(--secondary-color);
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.btn-delete:hover {
-  color: #6a2c5f;
-}
-
-/* 💰 Total */
-.cart-total {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1.3rem;
-  font-weight: 500;
-  color: var(--secondary-color);
-  margin-top: 20px;
-  padding: 10px;
-  background: rgba(206, 141, 198, 0.1);
-  border-radius: 8px;
-}
-
-.total-price {
-  font-weight: 600;
-  color: var(--primary-color);
-}
-
-/* ✅ Bouton commander */
-.cart-actions {
-  text-align: center;
-  margin-top: 20px;
-}
-
+/* ✅ Bouton d'envoi */
 .btn-order {
   background: var(--primary-color);
   color: white;
@@ -140,19 +71,32 @@ body {
   text-decoration: none;
   transition: 0.3s;
   display: inline-block;
+  margin-top: var(--spacing-unit * 2); /* Espacement entre le bouton et le champ précédent */
 }
 
 .btn-order:hover {
   background: var(--secondary-color);
 }
 
-/* 🔔 Panier vide */
-.alert-empty {
+/* 🔙 Lien de navigation */
+.cart-total {
   text-align: center;
-  background: rgba(206, 141, 198, 0.1);
-  padding: 15px;
-  border-radius: 10px;
-  font-size: 1.1rem;
-  font-weight: 500;
+  margin-top: 20px;
+}
+
+.cart-total a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.cart-total a:hover {
   color: var(--secondary-color);
+}
+
+/* 🌟 Erreurs de validation */
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 10px;
 }

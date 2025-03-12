@@ -1,0 +1,26 @@
+<div class="cart-container">
+    <h1 class="cart-title">Créer un compte</h1>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <div class="input-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, autocomplete: "email", placeholder: "Entrez votre email", required: true %>
+      </div>
+
+      <div class="input-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "Créez un mot de passe", required: true %>
+      </div>
+
+      <div class="input-group">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirmez votre mot de passe", required: true %>
+      </div>
+
+      <div class="input-group">
+        <%= f.submit "S'inscrire", class: "btn-order" %>
+      </div>
+    <% end %>
+
+    <p class="cart-total">Vous avez déjà un compte ? <a href="<%= new_user_session_path %>" class="btn-order">Se connecter</a></p>
+  </div>

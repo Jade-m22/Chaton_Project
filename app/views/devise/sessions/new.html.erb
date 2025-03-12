@@ -1,0 +1,21 @@
+<div class="cart-container">
+  <h1 class="cart-title">Se connecter</h1>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="input-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, autocomplete: "email", placeholder: "Entrez votre email", required: true %>
+    </div>
+
+    <div class="input-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, autocomplete: "current-password", placeholder: "Entrez votre mot de passe", required: true %>
+    </div>
+
+    <div class="input-group">
+      <%= f.submit "Se connecter", class: "btn-order" %>
+    </div>
+  <% end %>
+
+  <p class="cart-total">Vous n'avez pas de compte ? <a href="<%= new_user_registration_path %>" class="btn-order">Créer un compte</a></p>
+</div>
