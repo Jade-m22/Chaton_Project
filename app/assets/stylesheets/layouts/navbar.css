@@ -1,0 +1,75 @@
+@import url("../utils/variables.css"); /* Importer les variables */
+
+.navbar {
+  background: #f8f1eb; /* Blanc cassé / Beige */
+  padding: calc(var(--spacing-unit) * 2);
+}
+
+/* Texte de la navbar */
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--secondary-color) !important; /* Texte en couleur principale */
+}
+
+/* Espacement des éléments */
+.navbar-nav .nav-item {
+  margin-right: calc(var(--spacing-unit) * 2);
+}
+
+/* Liens de la navbar sans fond */
+.navbar-nav .nav-link {
+  background: none; /* Supprime le fond */
+  color: var(--secondary-color) !important; /* Texte en couleur primaire */
+  padding: 8px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Effet au survol */
+.navbar-nav .nav-link:hover {
+  color: var(--primary-color) !important; /* Texte en couleur secondaire */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
+}
+
+/* Effet au survol */
+.navbar-nav .nav-link:hover {
+  background: var(--secondary-color); /* Fond en couleur secondaire */
+  color: white !important;
+  transform: scale(1.05);
+}
+
+/* Dropdown Styling */
+.dropdown-menu {
+  background: #f8f1eb; /* Même couleur que la navbar */
+  border: none;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-item {
+  color: var(--text-color);
+  padding: 10px 15px;
+}
+
+.dropdown-item:hover {
+  background: var(--secondary-color);
+  color: white;
+}
+
+/* Bouton de déconnexion */
+.logout-btn {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  color: var(--text-color);
+  padding: 10px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: var(--secondary-color);
+  color: white;
+}
