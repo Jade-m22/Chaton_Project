@@ -1,0 +1,133 @@
+/* 📌 Styles spécifiques au Dashboard */
+.dashboard-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 📌 Titres */
+.dashboard-container h1 {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.dashboard-container h2 {
+  color: #34495e;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+/* 📌 Tableau des commandes */
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #ecf0f1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dashboard-table th, .dashboard-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #bdc3c7;
+}
+
+.dashboard-table th {
+  background: #2980b9;
+  color: white;
+}
+
+.dashboard-table tr:hover {
+  background: #d5dbdb;
+}
+
+/* 📌 Liste des commandes */
+.dashboard-order-list {
+  list-style: none;
+  padding: 0;
+}
+
+.dashboard-order-list li {
+  background: #ecf0f1;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard-order-status {
+  font-weight: bold;
+  color: #e67e22;
+}
+
+/* 📌 Boutons */
+.dashboard-btn {
+  padding: 8px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.dashboard-btn-success {
+  background: #2ecc71;
+  color: white;
+  border: none;
+}
+
+.dashboard-btn-danger {
+  background: #e74c3c;
+  color: white;
+  border: none;
+}
+
+.dashboard-btn:hover {
+  opacity: 0.8;
+}
+
+/* 🌟 Section du tableau de bord utilisateur */
+.user-dashboard {
+  max-width: 800px;
+  margin: 40px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 📌 Titres */
+.user-dashboard h2 {
+  color: #34495e;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+/* 🛒 Liste des commandes utilisateur */
+.user-order-list {
+  list-style: none;
+  padding: 0;
+}
+
+.user-order-list li {
+  background: #ecf0f1;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-order-status {
+  font-weight: bold;
+  color: #2980b9;
+}
