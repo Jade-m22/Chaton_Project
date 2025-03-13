@@ -35,36 +35,39 @@
 
 /* Informations du produit */
 .product-info {
-  padding: 5px;
+  padding: 10px;
+  text-align: left;
+  margin-left: 5px;
 }
 
 .product-info h2 {
   font-size: 1.2rem;
-  color: var(--primary-color);
+  color: black;
   margin-bottom: 1px;
 }
 
 .product-info p {
   font-size: 1rem;
-  color: var(--text-color);
+  color: rgb(83, 83, 83);
 }
 
 /* Bouton "Voir le produit" */
 .btn-show {
   display: inline-block;
   margin-top: 2px;
-  padding: 8px 15px;
-  border: none;
+  padding: 5px 8px;
+  border: 1px solid black;
   background: none;
-  color: var(--primary-color);
-  font-weight: bold;
+  color: black;
   text-decoration: none;
-  border-radius: 2px;
+  border-radius: 5px;
   transition: color 0.3s ease-in-out;
 }
 
 .btn-show:hover {
-  color: var(--secondary-color);
+  color: white;
+  background: #8b4a7e;
+  border-color: black;
 }
 
 .hero-banner {
