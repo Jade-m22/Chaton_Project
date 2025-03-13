@@ -1,11 +1,16 @@
-<h1>Profil de <%= @user.email %></h1>
+<div class="profile-container">
+  <h1 class="profile-title">Profil de <%= @user.email %></h1>
 
-<p>Email: <%= @user.email %></p>
-<p>Admin: <%= @user.admin? ? "Oui" : "Non" %></p>
-
+  <p class="profile-info"><strong>Email :</strong> <%= @user.email %></p>
+  <p class="profile-info">
+    <strong>Admin :</strong> 
+    <% if @user.admin? %>
+      <span class="admin-badge">Oui</span>
+    <% else %>
+      Non
+    <% end %>
+  </p>
+</div>
 <% if current_user == @user || current_user.admin? %>
   <%= render "users/edit", user: @user %>
 <% end %>
-
-
-
