@@ -25,13 +25,6 @@
           <% total_price += item_total %>
           <tr>
             <td><%= product.name %></td>
-            <td>
-              <% if product.image.attached? %>
-                <%= image_tag product.image.variant(resize_to_limit: [80, 80]), class: "cart-img" %>
-              <% else %>
-                <%= image_tag "placeholder.jpg", class: "cart-img", width: 80, height: 80 %>
-              <% end %>
-            </td>
             <td><%= number_to_currency(product.price, unit: "€") %></td>
             <td>
               <%= form_with url: update_quantity_cart_path(cart_item), method: :patch, local: true, class: "quantity-form" do |form| %>
