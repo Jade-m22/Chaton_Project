@@ -20,9 +20,11 @@
     <div class="input-group">
       <% if @product.images.attached? %>
         <label>Images actuelles :</label>
-        <% @product.images.each do |image| %>
-          <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "product-image" %>
-        <% end %>
+        <div class="image-preview">
+          <% @product.images.each do |image| %>
+            <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "product-image" %>
+          <% end %>
+        </div>
       <% end %>
 
       <%= f.label :images, "Changer les images" %>
@@ -35,4 +37,12 @@
   <% end %>
 
   <a href="<%= product_path(@product) %>" class="back-link">Retour</a>
+
+  <% if current_user.admin? %>
+    <div class="danger-zone">
+      <%= form_with url: product_path(@product), method: :delete, local: true do %>
+        <%= submit_tag "🗑 Supprimer le produit", class: "btn-delete", data: { confirm: "Êtes-vous sûr de vouloir supprimer ce produit ? Cette action est irréversible." } %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
