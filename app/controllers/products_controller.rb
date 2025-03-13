@@ -3,8 +3,8 @@ class ProductsController < ApplicationController
   before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @products = Product.all
-  end
+    @products = Product.where.not(name: ["Mug Chaton", "Sweat Chaton", "Totebag Chaton", "Tshirt Chaton"])
+  end  
 
   def show
   end
