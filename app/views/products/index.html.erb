@@ -11,7 +11,7 @@
     <div class="product-card">
       <%= image_tag product.images.first if product.images.attached? %>
       <div class="product-info">
-        <h2><%= product.name %></h2>
+        <p class="title_product"><%= product.name %></p>
         <p>Prix : <%= number_to_currency(product.price, unit: "€") %></p>
         <%= link_to "Voir le produit", product_path(product), class: "btn-show" %>
 
