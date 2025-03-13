@@ -1,2 +1,96 @@
-<h1>Bonjour <%= @order.user.email %>,</h1>
-<p>Merci pour votre commande ! Votre numéro de commande est <%= @order.id %>.</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    p {
+      font-size: 16px;
+      color: #555;
+    }
+    .order-details {
+      margin-top: 20px;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .order-details th, .order-details td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    .order-details th {
+      background-color: #28a745;
+      color: white;
+    }
+    .total {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: right;
+      margin-top: 15px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #777;
+    }
+    .cta {
+      display: block;
+      width: fit-content;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎉 Bonjour <%= @order.user.email %>,</h1>
+    <p>Merci pour votre commande ! Votre numéro de commande est <strong>#<%= @order.id %></strong>.</p>
+
+    <table class="order-details">
+      <thead>
+        <tr>
+          <th>Produit</th>
+          <th>Quantité</th>
+          <th>Prix</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.order_items.each do |item| %>
+          <tr>
+            <td><%= item.product.name %></td>
+            <td><%= item.quantity %></td>
+            <td><%= number_to_currency(item.price * item.quantity, unit: "€") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <p class="total">💰 Total : <%= number_to_currency(@order.total_price, unit: "€") %></p>
+
+    <a href="<%= order_url(@order) %>" class="cta">📦 Suivre ma commande</a>
+
+    <p class="footer">Merci pour votre confiance. À bientôt !</p>
+  </div>
+</body>
+</html>
