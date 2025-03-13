@@ -1,0 +1,56 @@
+.about-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.about-title {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.about-intro {
+  font-size: 18px;
+  color: #555;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.about-heading {
+  font-size: 22px;
+  color: #8b4a7e;
+  margin-top: 20px;
+}
+
+.about-text {
+  font-size: 16px;
+  color: #444;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.about-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.about-list li {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.footer {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: 40px;
+}

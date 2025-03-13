@@ -25,6 +25,9 @@ Rails.application.routes.draw do
 
   get "/dashboard", to: "users#dashboard", as: :dashboard
 
+  # Ajout de la route pour la page "À propos"
+  get "/about", to: "application#about", as: :about
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
