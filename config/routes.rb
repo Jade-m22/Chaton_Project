@@ -25,6 +25,9 @@ Rails.application.routes.draw do
 
   get "/dashboard", to: "users#dashboard", as: :dashboard
 
+  # Ajout de la route page contact
+  get "/contact", to: "application#contact", as: :contact
+
   # Ajout de la route pour la page "À propos"
   get "/about", to: "application#about", as: :about
 
