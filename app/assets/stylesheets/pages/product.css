@@ -73,12 +73,12 @@
 }
 
 .product-buttons {
-  display: block; /* Remet les boutons en mode bloc */
+  display: block; 
   text-align: center;
 }
 
 .product-buttons .btn {
-  display: block; /* Chaque bouton prend toute la largeur disponible */
-  width: fit-content; /* Ajuste la largeur au texte */
-  margin: 10px auto; /* Ajoute un espace entre les boutons et les centre */
+  display: block; 
+  width: fit-content; 
+  margin: 10px auto; 
 }
