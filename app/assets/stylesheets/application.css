@@ -1,0 +1,36 @@
+/* Assurer que le body et html prennent toute la hauteur */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Le container principal doit pousser le footer en bas */
+  .container {
+    flex: 1;
+  }
+  
+  /* Footer collé en bas */
+  .footer {
+    background-color: #919090;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+  }
+  
+  /* Styles des liens */
+  .footer a {
+    color: #ce8dc6;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+  
+  .footer a:hover {
+    text-decoration: underline;
+  }
+  
