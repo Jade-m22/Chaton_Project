@@ -23,7 +23,7 @@
         <%= image_tag @product.image.variant(resize_to_limit: [100, 100]), class: "product-image" %>
       <% end %>
       <%= f.label :image, "Changer l'image" %>
-      <%= f.file_field :image %>
+      <%= form.file_field :images, multiple: true %>
     </div>
 
     <div class="input-group">
