@@ -25,6 +25,9 @@ Rails.application.routes.draw do
 
   get "/dashboard", to: "users#dashboard", as: :dashboard
 
+  # Ajout de la route page terms
+  get "/terms", to: "application#terms", as: :terms
+
   # Ajout de la route page contact
   get "/contact", to: "application#contact", as: :contact
 
