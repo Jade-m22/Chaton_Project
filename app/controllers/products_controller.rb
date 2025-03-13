@@ -39,12 +39,16 @@ class ProductsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end  
-  
 
   def destroy
     @product.destroy
     redirect_to products_path, notice: "Produit supprimé."
   end
+
+  def derive
+    @derived_products = Product.where(category: "Dérivés") # Adapte selon ta logique
+  end
+  
 
   private
 

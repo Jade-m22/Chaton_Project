@@ -7,10 +7,13 @@
 </div>
 
 <div class="products-container">
-  <% @products.each do |product| %>
+  <% @derived_products.each do |product| %>
     <div class="product-card">
       <!-- Affichage de l'image du produit dérivé -->
-      <%= image_tag product.images.first if product.images.attached?, alt: "#{product.name} - Image" %>
+      <% if product.images.attached? %>
+        <%= image_tag product.images.first, alt: "#{product.name} - Image" %>
+      <% end %>
+
 
       <div class="product-info">
         <h2><%= product.name %></h2>
