@@ -18,12 +18,15 @@
     </div>
 
     <div class="input-group">
-      <% if @product.image.attached? %>
-        <label>Image actuelle :</label>
-        <%= image_tag @product.image.variant(resize_to_limit: [100, 100]), class: "product-image" %>
+      <% if @product.images.attached? %>
+        <label>Images actuelles :</label>
+        <% @product.images.each do |image| %>
+          <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "product-image" %>
+        <% end %>
       <% end %>
-      <%= f.label :image, "Changer l'image" %>
-      <%= form.file_field :images, multiple: true %>
+
+      <%= f.label :images, "Changer les images" %>
+      <%= f.file_field :images, multiple: true %>
     </div>
 
     <div class="input-group">
