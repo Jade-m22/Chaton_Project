@@ -1,18 +1,29 @@
-# Nettoyage de la base
+require "open-uri"
+
+# Supprime les anciens produits pour éviter les doublons
 Product.destroy_all
 
-puts "Création des produits..."
+# Liste de noms aléatoires pour les chatons
+chat_names = ["Milo", "Luna", "Simba", "Chaussette", "Félix", "Nala", "Tigrou", "Pacha", "Mimi", "Garfield"]
 
-products = [
-  { name: "Chaton en peluche", price: 19.99 },
-  { name: "Griffoir en carton", price: 9.99 },
-  { name: "Litière autonettoyante", price: 129.99 },
-  { name: "Croquettes premium", price: 24.50 },
-  { name: "Balle interactive", price: 5.99 }
-]
+# Liste des images à associer
+images = ["image.jpg", "image2.jpg", "image3.jpg", "image4.jpg", "image5.jpg"]
 
-products.each do |product|
-  Product.create!(product)
+# Création des produits
+5.times do |i|
+  product = Product.create!(
+    name: chat_names.sample, # Nom aléatoire
+    description: "Magnifique photo de chaton #{i + 1} ❤️",
+    price: rand(10..50) # Prix aléatoire entre 10€ et 50€
+  )
+
+  image_path = Rails.root.join("db/seeds/images/#{images[i]}")
+  
+  if File.exist?(image_path)
+    product.image.attach(io: File.open(image_path), filename: images[i])
+  else
+    puts "⚠️ Image #{images[i]} introuvable !"
+  end
 end
 
-puts "✅ 5 produits créés avec succès !"
+puts "✅ Seed terminée : #{Product.count} photos de chats ajoutées !"
