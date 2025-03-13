@@ -22,7 +22,8 @@
 
         <!-- Boutons d'action -->
         <%= link_to "Voir le produit", product_path(product), class: "btn-show" %>
-        <%= button_to "Ajouter au panier", add_to_cart_product_path(product), method: :post, class: "btn-add-to-cart" %>
+        <%= button_to "Ajouter au panier", add_item_cart_path(product_id: product.id), method: :post, class: "btn-add-to-cart" %>
+
       </div>
     </div>
   <% end %>

@@ -46,8 +46,9 @@ class ProductsController < ApplicationController
   end
 
   def derive
-    @derived_products = Product.where(category: "Dérivés") # Adapte selon ta logique
-  end
+    derived_names = ["Mug Chaton", "Sweat Chaton", "Totebag Chaton", "Tshirt Chaton"]
+    @derived_products = Product.where(name: derived_names)
+  end  
   
 
   private
