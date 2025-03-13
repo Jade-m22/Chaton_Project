@@ -39,8 +39,8 @@ rails server
 Accédez ensuite à http://localhost:3000 dans votre navigateur.
 
 👥 Équipe de développement
-Nom 1 - Développeur Backend
-Nom 2 - Développeur Frontend
-Nom 3 - Designer UI/UX
+Nom 1 - Jeremy
+Nom 2 - Jade
+Nom 3 - Jeatan
 📜 Licence
 Ce projet est sous licence MIT.
