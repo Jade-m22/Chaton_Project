@@ -1,17 +1,20 @@
-<h1 class="cart-title">🛍 Votre Panier</h1>
+<div class="cart-container">
+  <h1 class="cart-title">🛍 Votre Panier</h1>
 
-<% if @cart.cart_items.empty? %>
-  <div class="alert-empty">Votre panier est vide.</div>
-<% else %>
-  <div class="cart-container">
+  <% if @cart.cart_items.empty? %>
+    <div class="alert-empty">Votre panier est vide.</div>
+    <div class="cart-actions">
+      <%= link_to "🛍️ Continuer vos achats", products_path, class: "btn-continue" %>
+    </div>
+  <% else %>
     <table class="cart-table">
       <thead>
         <tr>
           <th>Produit</th>
-          <th>Prix</th>
-          <th>Quantité</th>
-          <th>Total</th>
           <th></th>
+          <th>Prix</th>
+          <th>Qauntité</th>
+          <th>Total</th>
         </tr>
       </thead>
       <tbody>
@@ -22,6 +25,13 @@
           <% total_price += item_total %>
           <tr>
             <td><%= product.name %></td>
+            <td>
+              <% if product.image.attached? %>
+                <%= image_tag product.image.variant(resize_to_limit: [80, 80]), class: "cart-img" %>
+              <% else %>
+                <%= image_tag "placeholder.jpg", class: "cart-img", width: 80, height: 80 %>
+              <% end %>
+            </td>
             <td><%= number_to_currency(product.price, unit: "€") %></td>
             <td>
               <%= form_with url: update_quantity_cart_path(cart_item), method: :patch, local: true, class: "quantity-form" do |form| %>
@@ -30,7 +40,7 @@
             </td>
             <td><%= number_to_currency(item_total, unit: "€") %></td>
             <td>
-              <%= button_to "✕", remove_item_cart_path(cart_item.id), method: :delete, class: "btn-delete" %>
+              <%= button_to "✕", remove_item_cart_path(cart_item.id), method: :delete, class: "btn-delete", data: { confirm: "Voulez-vous vraiment supprimer cet article ?" } %>
             </td>
           </tr>
         <% end %>
@@ -42,14 +52,11 @@
       <span class="total-price"><%= number_to_currency(total_price, unit: "€") %></span>
     </div>
 
-    <% if @cart.cart_items.any? %>
     <div class="cart-actions">
       <%= form_with url: orders_path, method: :post, local: true do |f| %>
         <%= f.submit "Passer la commande", class: "btn-order", data: { turbo: false } %>
       <% end %>
+      <%= link_to "🛍️ Continuer vos achats", products_path, class: "btn-continue" %>
     </div>
-    <% end %>
-
-    </div>
-  </div>
-<% end %>
+  <% end %> 
+</div>
