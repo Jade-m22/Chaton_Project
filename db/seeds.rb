@@ -4,7 +4,7 @@ require "open-uri"
 Product.delete_all
 
 # Liste des noms des chats
-chat_names = ["Milo", "Luna", "Simba", "Chaussette", "Félix"].shuffle
+chat_names = ["Milo", "Luna", "Simba", "Chaussette", "Félix", "Snow", "Tommy", "Babe", "Plume", "Boule", "June", "Flocon"].shuffle
 
 # Création des produits avec deux images associées
 chat_names.each_with_index do |name, index|
