@@ -15,14 +15,14 @@ class OrdersController < ApplicationController
   # POST /orders - Créer une commande
   def create
     cart_items = current_user.cart_items
-
+  
     if cart_items.empty?
       redirect_to cart_path, alert: "Votre panier est vide."
       return
     end
-
+  
     order = current_user.orders.new(status: "pending")
-
+  
     # Ajouter les produits du panier à la commande
     cart_items.each do |cart_item|
       order.order_items.build(
@@ -31,20 +31,20 @@ class OrdersController < ApplicationController
         price: cart_item.product.price
       )
     end
-
-    order.calculate_total_price # Assure que total_price est défini avant save
-
+  
+    order.calculate_total_price
+  
     if order.save
       cart_items.destroy_all
-      redirect_to checkout_order_path(order)  # Redirection vers checkout après la création de la commande
+  
+      redirect_to checkout_order_path(order)
     else
       puts "❌ Erreur lors de la sauvegarde de l'order : #{order.errors.full_messages}"
       redirect_to cart_path, alert: "Erreur lors de la création de la commande."
     end
   end
-
-
-  # GET /orders/:id/checkout - Rediriger vers Stripe Checkout
+  
+  # Rediriger vers Stripe Checkout
   def checkout
     begin
       session = Stripe::Checkout::Session.create(
@@ -79,6 +79,11 @@ class OrdersController < ApplicationController
   
     if @order && @order.status == "pending"
       @order.update(status: "paid")
+
+      OrderMailer.confirmation_email(@order).deliver_later
+
+      OrderMailer.admin_notification(@order).deliver_later
+  
       flash[:notice] = "🎉 Paiement réussi ! Merci pour votre commande."
     else
       flash[:alert] = "Commande introuvable ou déjà traitée."
@@ -86,6 +91,8 @@ class OrdersController < ApplicationController
   
     redirect_to dashboard_path
   end
+  
+  
 
   def cancel
     @order = current_user.orders.find_by(id: params[:id])
