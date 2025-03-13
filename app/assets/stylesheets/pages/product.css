@@ -1,0 +1,84 @@
+.product-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.product-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.product-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.no-image {
+  font-style: italic;
+  color: #999;
+}
+
+.product-details {
+  margin-top: 15px;
+}
+
+.product-price {
+  font-size: 20px;
+  color: #333;
+  font-weight: bold;
+}
+
+.product-description {
+  font-size: 16px;
+  color: #555;
+}
+
+.product-actions {
+  margin-top: 20px;
+}
+
+.btn-primary {
+  background-color: #ce8dc6;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-warning {
+  background-color: #8b4a7e;
+  color: black;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background-color: #ce8dc6;
+}
+
+.btn-warning:hover {
+  background-color: #8b4a7e;
+}
+
+.product-buttons {
+  display: block; /* Remet les boutons en mode bloc */
+  text-align: center;
+}
+
+.product-buttons .btn {
+  display: block; /* Chaque bouton prend toute la largeur disponible */
+  width: fit-content; /* Ajuste la largeur au texte */
+  margin: 10px auto; /* Ajoute un espace entre les boutons et les centre */
+}
