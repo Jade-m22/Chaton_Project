@@ -33,6 +33,9 @@
                 <%= link_to "Tableau de Bord", dashboard_path, class: "dropdown-item" %>
               </li>
               <li>
+                <%= link_to "Modifier mon profil", edit_user_registration_path, class: "dropdown-item" %>
+              </li>
+              <li>
                 <%= form_with url: destroy_user_session_path, method: :delete, class: "d-inline" do %>
                   <%= submit_tag "Se déconnecter", class: "dropdown-item logout-btn" %>
                 <% end %>

@@ -85,8 +85,8 @@
 
 /* ❌ Bouton supprimer */
 .btn-delete {
-  background-color: #ff4d4d;
-  color: white;
+  background-color: #ed8b8b;
+  color: rgb(0, 0, 0);
   padding: 8px 16px;
   border-radius: 20px;
   cursor: pointer;
