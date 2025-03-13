@@ -27,12 +27,19 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if @product.update(product_params)
-      redirect_to @product, notice: "Produit mis à jour."
-    else
-      render :edit
+    @product = Product.find(params[:id])
+    if params[:product][:images].present?
+      @product.images.attach(params[:product][:images])
     end
-  end
+  
+    # Mise à jour des autres champs sans toucher aux images
+    if @product.update(product_params.except(:images))
+      redirect_to @product, notice: "Produit mis à jour avec succès."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end  
+  
 
   def destroy
     @product.destroy
