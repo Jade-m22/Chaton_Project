@@ -1,0 +1,26 @@
+<div class="hero-banner">
+  <%= image_tag "banner.jpg", alt: "Bandeau promotionnel", class: "banner-image" %>
+  <div class="banner-overlay">
+    <h1>Bienvenue sur Cat’s Eye</h1>
+    <p>Découvrez nos magnifiques produits dérivés personnalisés avec des chatons 🐱</p>
+  </div>
+</div>
+
+<div class="products-container">
+  <% @products.each do |product| %>
+    <div class="product-card">
+      <!-- Affichage de l'image du produit dérivé -->
+      <%= image_tag product.images.first if product.images.attached?, alt: "#{product.name} - Image" %>
+
+      <div class="product-info">
+        <h2><%= product.name %></h2>
+        <p><%= truncate(product.description, length: 100) %></p> <!-- Description abrégée -->
+        <p class="price">Prix : <%= number_to_currency(product.price, unit: "€") %></p>
+
+        <!-- Boutons d'action -->
+        <%= link_to "Voir le produit", product_path(product), class: "btn-show" %>
+        <%= button_to "Ajouter au panier", add_to_cart_product_path(product), method: :post, class: "btn-add-to-cart" %>
+      </div>
+    </div>
+  <% end %>
+</div>
