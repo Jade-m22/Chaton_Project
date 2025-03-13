@@ -3,8 +3,8 @@ class ProductsController < ApplicationController
   before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @products = Product.all
-  end
+    @products = Product.where.not(name: ["Mug Chaton", "Sweat Chaton", "Totebag Chaton", "Tshirt Chaton"])
+  end  
 
   def show
   end
@@ -46,8 +46,9 @@ class ProductsController < ApplicationController
   end
 
   def derive
-    @derived_products = Product.where(category: "Dérivés") # Adapte selon ta logique
-  end
+    derived_names = ["Mug Chaton", "Sweat Chaton", "Totebag Chaton", "Tshirt Chaton"]
+    @derived_products = Product.where(name: derived_names)
+  end  
   
 
   private
