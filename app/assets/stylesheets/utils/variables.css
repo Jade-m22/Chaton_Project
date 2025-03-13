@@ -4,6 +4,7 @@
   --secondary-color: #8b4a7e;
   --background-color: #f4f4f4;
   --text-color: #333;
+  --border-color: rgba(139, 74, 126, 0.2);
 
   /* 📏 Espacements */
   --spacing-unit: 8px;
