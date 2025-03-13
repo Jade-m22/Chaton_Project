@@ -13,7 +13,11 @@ Rails.application.routes.draw do
 
   delete "/logout", to: "users#logout", as: :logout
 
-  resources :products
+  resources :products do
+    collection do
+      get 'derive' # Ajoute cette ligne pour que "derive" soit une action sur la collection et non un ID de produit
+    end
+  end  
 
   resource :cart, only: [:show] do
     post "add_item/:product_id", to: "carts#add_item", as: "add_item"
