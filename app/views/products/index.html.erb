@@ -1,4 +1,10 @@
-<h1>Nos Produits</h1>
+<div class="hero-banner">
+  <%= image_tag "banner.jpg", alt: "Bandeau promotionnel", class: "banner-image" %>
+  <div class="banner-overlay">
+    <h1>Bienvenue sur Cat’s Eye’s</h1>
+    <p>Découvrez nos magnifiques affiches de chats 🐱</p>
+  </div>
+</div>
 
 <div class="products-container">
   <% @products.each do |product| %>
