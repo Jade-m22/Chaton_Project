@@ -1,28 +1,24 @@
-<div class="wrapper">
-  <div class="product-container">
+<div class="product-show-container">
+  <div class="product-image-section">
+    <% if @product.image.attached? %>
+      <%= image_tag @product.image, alt: @product.name, class: "product-main-image" %>
+    <% else %>
+      <p class="no-image">Aucune image disponible</p>
+    <% end %>
+  </div>
+
+  <div class="product-info-section">
     <h1 class="product-title"><%= @product.name %></h1>
 
-    <div class="product-image">
-      <% if @product.image.attached? %>
-        <%= image_tag @product.image, alt: @product.name %>
-      <% else %>
-        <p class="no-image">Aucune image disponible</p>
-      <% end %>
-    </div>
-
-    <div class="product-details">
-      <p class="product-price"><strong>Prix :</strong> <%= number_to_currency(@product.price, unit: "€") %></p>
-      <p class="product-description"><%= @product.description %></p>
-    </div>
+    <p class="product-price"><strong>💰 Prix :</strong> <%= number_to_currency(@product.price, unit: "€") %></p>
+    <p class="product-description"><%= @product.description %></p>
 
     <div class="product-actions">
-      <div class="product-buttons">
-        <%= button_to "Ajouter au panier", add_item_cart_path(@product), method: :post, class: "btn btn-primary" %>
+      <%= button_to "🛒 Ajouter au panier", add_item_cart_path(@product), method: :post, class: "btn btn-primary" %>
 
-        <% if current_user&.admin? %>
-          <%= link_to "Modifier ce produit", edit_product_path(@product), class: "btn btn-warning" %>
-        <% end %>
-      </div>
+      <% if current_user&.admin? %>
+        <%= link_to "✏️ Modifier le produit", edit_product_path(@product), class: "btn btn-secondary" %>
+      <% end %>
     </div>
   </div>
 </div>

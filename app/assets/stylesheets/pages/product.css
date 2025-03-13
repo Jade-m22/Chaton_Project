@@ -1,84 +1,93 @@
-.product-container {
-  max-width: 600px;
-  margin: 20px auto;
+/* 🌟 Conteneur global du produit */
+.product-show-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  margin: 40px auto;
   padding: 20px;
-  background: #f4f4f4;
+  background: var(--background-color);
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px var(--border-color);
+}
+
+/* 🖼️ Section image */
+.product-image-section {
+  width: 100%;
   text-align: center;
 }
 
-.product-title {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 15px;
-}
-
-.product-image img {
+.product-main-image {
   max-width: 100%;
   height: auto;
-  border-radius: 5px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--border-color);
 }
 
 .no-image {
   font-style: italic;
-  color: #999;
+  color: var(--secondary-color);
+  font-size: 16px;
 }
 
-.product-details {
-  margin-top: 15px;
+/* ℹ️ Infos du produit */
+.product-info-section {
+  text-align: center;
+  padding: 20px;
+}
+
+.product-title {
+  font-size: 28px;
+  color: var(--text-color);
+  margin-bottom: 10px;
 }
 
 .product-price {
-  font-size: 20px;
-  color: #333;
+  font-size: 22px;
+  color: var(--secondary-color);
   font-weight: bold;
 }
 
 .product-description {
-  font-size: 16px;
-  color: #555;
+  font-size: var(--font-size-base);
+  color: var(--text-color);
+  margin-top: 10px;
 }
 
+/* 🎮 Actions */
 .product-actions {
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 12px; /* Espacement entre les boutons */
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 14px; /* Taille réduite */
+  border-radius: 5px;
+  font-size: 14px; /* Plus petit */
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 .btn-primary {
-  background-color: #ce8dc6;
+  background-color: var(--primary-color);
   color: white;
-  padding: 10px 15px;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
 }
 
-.btn-warning {
-  background-color: #8b4a7e;
-  color: black;
-  padding: 10px 15px;
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: white;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
 }
 
 .btn-primary:hover {
-  background-color: #ce8dc6;
+  background-color: #b379af;
 }
 
-.btn-warning:hover {
-  background-color: #8b4a7e;
-}
-
-.product-buttons {
-  display: block; 
-  text-align: center;
-}
-
-.product-buttons .btn {
-  display: block; 
-  width: fit-content; 
-  margin: 10px auto; 
+.btn-secondary:hover {
+  background-color: #713d67;
 }
