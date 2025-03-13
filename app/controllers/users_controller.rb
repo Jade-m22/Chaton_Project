@@ -46,11 +46,15 @@ class UsersController < ApplicationController
     redirect_to root_path, notice: "Vous avez été déconnecté."
   end
   
-
   def dashboard
-    @user = current_user
-    @orders = current_user.admin? ? Order.includes(:user).all : current_user.orders
-  end  
+    if current_user.admin?
+      @admin_orders = current_user.orders # Achats de l'admin
+      @customer_orders = Order.where.not(user: current_user) # Commandes des autres clients
+    else
+      @orders = current_user.orders
+    end
+  end
+  
 
   private
 

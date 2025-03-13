@@ -1,51 +1,59 @@
-<h1>Tableau de Bord</h1>
-<p>Bienvenue, <%= current_user.email %> !</p>
+<div class="dashboard-container">
+  <h1>Tableau de Bord</h1>
+  <p>Bienvenue, <%= current_user.email %> !</p>
 
-<% if current_user.admin? %>
-  <h2>📊 Tableau de bord Admin</h2>
-  <p>Statistiques des ventes et gestion des commandes.</p>
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Client</th>
-        <th>Date</th>
-        <th>Total (€)</th>
-        <th>Statut</th>
-        <% if current_user.admin? %>
-          <th>Actions</th>
-        <% end %>
-      </tr>
-    </thead>
-    <tbody>
-      <% @orders.each do |order| %>
-        <tr>
-          <td>#<%= order.id %></td>
-          <td><%= order.user.email %></td>
-          <td><%= order.created_at.strftime("%d/%m/%Y") %></td>
-          <td><%= number_to_currency(order.total_price, unit: "€") %></td>
-          <td><%= order.status.capitalize %></td>
-
-          <% if current_user.admin? %>
-          <td>
-            <% if order.status == "paid" %>
-              <%= button_to "Expédier", order_path(order, order: { status: "shipped" }), method: :patch, class: "btn btn-success btn-sm" %>
-            <% end %>
-
-            <%= button_to "Annuler", order_path(order), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Voulez-vous vraiment annuler cette commande ?" } %>
-          </td>
-          <% end %>
-
-        </tr>
+  <% if current_user.admin? %>
+    <h2>📊 Vos Achats</h2>
+    <ul class="dashboard-order-list">
+      <% @admin_orders.each do |order| %>
+        <li>
+          <span>Commande #<%= order.id %> - <%= order.created_at.strftime("%d/%m/%Y") %></span>
+          <span class="dashboard-order-status"><%= order.status.capitalize %></span>
+        </li>
       <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <h2>🛒 Vos commandes</h2>
-  <ul>
-    <% @orders.each do |order| %>
-      <li>Commande #<%= order.id %> - <%= order.created_at.strftime("%d/%m/%Y") %> - <strong><%= order.status.capitalize %></strong></li>
-    <% end %>
-  </ul>
-<% end %>
+    </ul>
+
+    <h2>📦 Commandes des Clients</h2>
+    <table class="dashboard-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Client</th>
+          <th>Date</th>
+          <th>Total (€)</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @customer_orders.each do |order| %>
+          <tr>
+            <td>#<%= order.id %></td>
+            <td><%= order.user.email %></td>
+            <td><%= order.created_at.strftime("%d/%m/%Y") %></td>
+            <td><%= number_to_currency(order.total_price, unit: "€") %></td>
+            <td class="dashboard-order-status"><%= order.status.capitalize %></td>
+            <td>
+              <% if order.status == "paid" %>
+                <%= button_to "Expédier", order_path(order, order: { status: "shipped" }), method: :patch, class: "dashboard-btn dashboard-btn-success btn-sm" %>
+              <% end %>
+              <%= button_to "Annuler", order_path(order), method: :delete, class: "dashboard-btn dashboard-btn-danger btn-sm", data: { confirm: "Voulez-vous vraiment annuler cette commande ?" } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <% else %>
+  <div class="user-dashboard">
+    <h2>🛒 Vos commandes</h2>
+    <ul class="user-order-list">
+      <% @orders.each do |order| %>
+        <li>
+          <span>Commande #<%= order.id %> - <%= order.created_at.strftime("%d/%m/%Y") %></span>
+          <span class="user-order-status"><%= order.status.capitalize %></span>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
