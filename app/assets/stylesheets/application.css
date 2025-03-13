@@ -66,4 +66,33 @@ html, body {
     font-weight: bold;
     font-size: 14px;
   }
-  
+  /* Style du bouton supprimer */
+.btn-delete {
+  background-color: #ff4d4d; /* Rouge vif pour indiquer un danger */
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-delete:hover {
+  background-color: #cc0000; /* Rouge plus foncé au survol */
+  transform: scale(1.05); /* Effet de zoom léger */
+}
+
+.btn-delete:active {
+  background-color: #990000; /* Encore plus foncé au clic */
+  transform: scale(0.95); /* Effet de pression */
+}
+
+/* Supprimer l'encadrement rouge de la danger-zone */
+.danger-zone {
+  margin-top: 20px;
+  text-align: center;
+}
