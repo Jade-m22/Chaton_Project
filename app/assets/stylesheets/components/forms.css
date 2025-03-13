@@ -1,12 +1,16 @@
-/* 🌸 Variables */
 :root {
+  /* 🎨 Couleurs */
   --primary-color: #ce8dc6;
   --secondary-color: #8b4a7e;
-  --background-color: #fafafa;
-  --text-color: #4a4a4a;
+  --background-color: #f4f4f4;
+  --text-color: #333;
   --border-color: rgba(139, 74, 126, 0.2);
-  --spacing-unit: 8px;  /* Unité d'espacement */
-  --font-primary: "Poppins", sans-serif;
+
+  /* 📏 Espacements */
+  --spacing-unit: 8px;
+
+  /* 🖋️ Typographie */
+  --font-primary: Arial, sans-serif;
   --font-size-base: 16px;
 }
 
@@ -18,85 +22,105 @@ body {
   color: var(--text-color);
 }
 
+/* 🎯 Conteneur du formulaire */
+.form-container {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 50px auto;
+  transition: transform 0.3s ease;
+}
+
+.form-container:hover {
+  transform: scale(1.02);
+}
+
 /* 🔹 Titre principal */
-.cart-title {
+.form-title {
   text-align: center;
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: 1.8rem;
+  font-weight: 600;
   color: var(--secondary-color);
   margin-bottom: 20px;
 }
 
-/* 🛒 Conteneur du panier */
-.cart-container {
-  width: 90%;
-  max-width: 800px;
-  margin: 0 auto;
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+/* 📝 Champs du formulaire */
+.input-group {
+  margin-bottom: 20px;
 }
 
-/* 📝 Formulaire */
-.input-group {
-  margin-bottom: var(--spacing-unit * 3); /* Ajoute un espacement entre chaque champ de formulaire */
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text-color);
 }
 
 /* 📏 Champs de saisie */
-input[type="email"], input[type="password"] {
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="number"],
+textarea,
+input[type="file"] {
   width: 100%;
-  padding: var(--spacing-unit * 2); /* Ajout de padding pour aérer le champ */
+  padding: 12px;
   font-size: 16px;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 10px;
   background: white;
   color: var(--text-color);
-  transition: 0.2s;
+  transition: border 0.2s;
+  display: block;
 }
 
-input[type="email"]:focus, input[type="password"]:focus {
+input:focus,
+textarea:focus {
   outline: none;
   border-color: var(--secondary-color);
 }
 
-/* ✅ Bouton d'envoi */
-.btn-order {
-  background: var(--primary-color);
-  color: white;
-  padding: 10px 18px;
-  font-size: 16px;
-  font-weight: 500;
-  border-radius: 25px;
-  text-decoration: none;
-  transition: 0.3s;
-  display: inline-block;
-  margin-top: var(--spacing-unit * 2); /* Espacement entre le bouton et le champ précédent */
+/* 📸 Image actuelle (dans la modification de produit) */
+.input-group img {
+  display: block;
+  margin: 10px 0;
+  border-radius: 10px;
+  max-width: 100px;
+  height: auto;
 }
 
-.btn-order:hover {
+/* ✅ Bouton de soumission */
+.btn-submit {
+  width: 100%;
+  background: var(--primary-color);
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.btn-submit:hover {
   background: var(--secondary-color);
+  transform: scale(1.05);
 }
 
 /* 🔙 Lien de navigation */
-.cart-total {
+.back-link {
+  display: block;
   text-align: center;
-  margin-top: 20px;
-}
-
-.cart-total a {
-  text-decoration: none;
+  margin-top: 15px;
   color: var(--primary-color);
   font-weight: bold;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-.cart-total a:hover {
+.back-link:hover {
   color: var(--secondary-color);
-}
-
-/* 🌟 Erreurs de validation */
-.error-message {
-  color: red;
-  font-size: 0.9rem;
-  margin-top: 10px;
 }

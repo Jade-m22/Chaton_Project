@@ -1,5 +1,5 @@
-<div class="cart-container">
-    <h1 class="cart-title">Créer un compte</h1>
+<div class="form-container">
+    <h1 class="form-title">Créer un compte</h1>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <div class="input-group">
@@ -18,9 +18,9 @@
       </div>
 
       <div class="input-group">
-        <%= f.submit "S'inscrire", class: "btn-order" %>
+        <%= f.submit "S'inscrire", class: "btn-submit" %>
       </div>
     <% end %>
 
-    <p class="cart-total">Vous avez déjà un compte ? <a href="<%= new_user_session_path %>" class="btn-order">Se connecter</a></p>
-  </div>
+    <p class="back-link">Vous avez déjà un compte ? <a href="<%= new_user_session_path %>">Se connecter</a></p>
+</div>

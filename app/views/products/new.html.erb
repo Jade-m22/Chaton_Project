@@ -1,29 +1,31 @@
-<h1>Ajouter un Nouveau Produit</h1>
+<div class="form-container">
+  <h1 class="form-title">Ajouter un Nouveau Produit</h1>
 
-<%= form_with model: @product, url: products_path, local: true do |f| %>
-  <div class="form-group">
-    <%= f.label :name, "Nom du produit" %>
-    <%= f.text_field :name, class: "form-control", required: true %>
-  </div>
+  <%= form_with model: @product, url: products_path, local: true do |f| %>
+    <div class="input-group">
+      <%= f.label :name, "Nom du produit" %>
+      <%= f.text_field :name, required: true %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :price, "Prix (€)" %>
-    <%= f.number_field :price, step: 0.01, class: "form-control", required: true %>
-  </div>
+    <div class="input-group">
+      <%= f.label :price, "Prix (€)" %>
+      <%= f.number_field :price, step: 0.01, required: true %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :description, "Description" %>
-    <%= f.text_area :description, class: "form-control", required: true %>
-  </div>
+    <div class="input-group">
+      <%= f.label :description, "Description" %>
+      <%= f.text_area :description, required: true %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :image, "Image du produit" %>
-    <%= f.file_field :image, class: "form-control" %>
-  </div>
+    <div class="input-group">
+      <%= f.label :image, "Image du produit" %>
+      <%= f.file_field :image %>
+    </div>
 
-  <div class="form-group">
-    <%= f.submit "Créer le produit", class: "btn btn-primary" %>
-  </div>
-<% end %>
+    <div class="input-group">
+      <%= f.submit "Créer le produit", class: "btn-submit" %>
+    </div>
+  <% end %>
 
-<%= link_to "Retour à la liste des produits", products_path, class: "btn btn-secondary" %>
+  <a href="<%= products_path %>" class="back-link">Retour à la liste des produits</a>
+</div>
