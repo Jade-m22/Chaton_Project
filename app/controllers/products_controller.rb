@@ -46,7 +46,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :price, :description, :category, :image)
+    params.require(:product).permit(:name, :price, :description, :category, images: [])
   end  
 
   def authenticate_admin!

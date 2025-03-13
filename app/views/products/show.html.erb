@@ -1,24 +1,43 @@
 <div class="product-show-container">
-  <div class="product-image-section">
-    <% if @product.image.attached? %>
-      <%= image_tag @product.image, alt: @product.name, class: "product-main-image" %>
-    <% else %>
-      <p class="no-image">Aucune image disponible</p>
-    <% end %>
-  </div>
+  <div class="product-content">
+    <!-- 📸 Carrousel d'images (colonne gauche) -->
+    <div class="product-image-section">
+      <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <% if @product.images.attached? %>
+            <% @product.images.each_with_index do |image, index| %>
+              <div class="carousel-item <%= 'active' if index == 0 %>">
+                <%= image_tag image, class: "d-block w-100 product-carousel-image", alt: @product.name %>
+              </div>
+            <% end %>
+          <% else %>
+            <p class="no-image">Aucune image disponible</p>
+          <% end %>
+        </div>
 
-  <div class="product-info-section">
-    <h1 class="product-title"><%= @product.name %></h1>
+        <!-- Flèches de navigation -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
 
-    <p class="product-price"><strong>💰 Prix :</strong> <%= number_to_currency(@product.price, unit: "€") %></p>
-    <p class="product-description"><%= @product.description %></p>
+    <!-- ℹ️ Infos produit (colonne droite) -->
+    <div class="product-info-section">
+      <h1 class="product-title"><%= @product.name %></h1>
+      <p class="product-price"><strong>💰 Prix :</strong> <%= number_to_currency(@product.price, unit: "€") %></p>
+      <p class="product-description"><%= @product.description %></p>
 
-    <div class="product-actions">
-      <%= button_to "🛒 Ajouter au panier", add_item_cart_path(@product), method: :post, class: "btn btn-primary" %>
+      <div class="product-actions">
+        <%= button_to "🛒 Ajouter au panier", add_item_cart_path(@product), method: :post, class: "btn btn-primary" %>
 
-      <% if current_user&.admin? %>
-        <%= link_to "✏️ Modifier le produit", edit_product_path(@product), class: "btn btn-secondary" %>
-      <% end %>
+        <% if current_user&.admin? %>
+          <%= link_to "✏️ Modifier le produit", edit_product_path(@product), class: "btn btn-secondary" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

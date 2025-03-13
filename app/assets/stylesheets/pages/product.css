@@ -1,9 +1,6 @@
-/* 🌟 Conteneur global du produit */
+/* 🌟 Conteneur global */
 .product-show-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 800px;
+  max-width: 900px;
   margin: 40px auto;
   padding: 20px;
   background: var(--background-color);
@@ -11,29 +8,30 @@
   box-shadow: 0px 4px 10px var(--border-color);
 }
 
-/* 🖼️ Section image */
-.product-image-section {
-  width: 100%;
-  text-align: center;
+/* 🌟 Disposition en deux colonnes */
+.product-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px; /* Espacement entre l'image et le texte */
 }
 
-.product-main-image {
-  max-width: 100%;
-  height: auto;
+/* 📸 Carrousel d'images */
+.product-image-section {
+  flex: 1;
+  max-width: 50%; /* L'image prend la moitié de l'espace */
+}
+
+.product-carousel-image {
   border-radius: 10px;
   box-shadow: 0 4px 8px var(--border-color);
 }
 
-.no-image {
-  font-style: italic;
-  color: var(--secondary-color);
-  font-size: 16px;
-}
-
-/* ℹ️ Infos du produit */
+/* ℹ️ Infos produit */
 .product-info-section {
-  text-align: center;
-  padding: 20px;
+  flex: 1;
+  max-width: 50%;
+  text-align: left; /* Alignement du texte */
 }
 
 .product-title {
@@ -54,20 +52,17 @@
   margin-top: 10px;
 }
 
-/* 🎮 Actions */
+/* 🎮 Boutons d'action */
 .product-actions {
   margin-top: 20px;
   display: flex;
-  justify-content: center;
-  gap: 12px; /* Espacement entre les boutons */
+  gap: 12px;
 }
 
 .btn {
-  display: inline-block;
-  padding: 8px 14px; /* Taille réduite */
+  padding: 8px 14px;
   border-radius: 5px;
-  font-size: 14px; /* Plus petit */
-  text-decoration: none;
+  font-size: 14px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
@@ -90,4 +85,17 @@
 
 .btn-secondary:hover {
   background-color: #713d67;
+}
+
+/* 📱 Responsive (affichage en colonne sur mobile) */
+@media (max-width: 768px) {
+  .product-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-image-section, .product-info-section {
+    max-width: 100%;
+    text-align: center;
+  }
 }
