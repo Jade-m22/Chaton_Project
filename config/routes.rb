@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   # Ajout de la route page terms
   get "/terms", to: "application#terms", as: :terms
 
+  get "mentions-legales", to: "application#legal_mentions", as: :legal_mentions
+
   # Ajout de la route page contact
   get "/contact", to: "application#contact", as: :contact
 
