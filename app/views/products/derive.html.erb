@@ -20,7 +20,11 @@
         <p class="price">Prix : <%= number_to_currency(product.price, unit: "€") %></p>
 
         <!-- Boutons d'action -->
-        <%= link_to "Voir le produit", product_path(product), class: "btn-show" %>
+        <%= link_to product_path(product), class: "btn-show" do %>
+        <span></span>
+          <p data-title="Voir le produit" data-text="Découvrir"></p>
+        <% end %>
+
 
       </div>
     </div>
